@@ -8,7 +8,6 @@ public class ConsultaBilleteraController extends BilleteraController {
 
     public ClienteModel cliente_model;
 
-
     //1
     public ConsultaBilleteraController(ClienteModel cliente_model) {
         this.cliente_model = cliente_model;

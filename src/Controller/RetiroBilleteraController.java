@@ -13,15 +13,15 @@ public class RetiroBilleteraController extends BilleteraController {
     }
     
     @Override
-    public int transaccion() {
-        int cantidadARetirar = Integer.parseInt(JOptionPane.showInputDialog(null, "Cuanto Dinero deseas Retirar: "));
+    public void transaccion() {
+        int retiro_dinero = Integer.parseInt(JOptionPane.showInputDialog(null, "Cuanto Dinero deseas Retirar: "));
 
         int saldoActual = cliente_model.getBilletera().getDinero();
 
-        if (cantidadARetirar > saldoActual) {
+        if (retiro_dinero > saldoActual) {
             JOptionPane.showMessageDialog(null, "No tiene suficiente dinero para realizar esta transacción.");
         } else {
-            cliente_model.getBilletera().setDinero(saldoActual - cantidadARetirar);
+            cliente_model.getBilletera().setDinero(saldoActual - retiro_dinero);
 
             JOptionPane.showMessageDialog(null, "Retiro realizado. Nuevo saldo: " + cliente_model.getBilletera().getDinero());
         }
