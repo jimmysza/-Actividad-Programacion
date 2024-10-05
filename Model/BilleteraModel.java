@@ -1,18 +1,14 @@
-
 package Model;
 
- 
-public class BilleteraModel extends ClienteModel {
+public class BilleteraModel {
     private int dinero;
 
     public BilleteraModel() {
     }
 
-    public BilleteraModel(int dinero, String nombre_usuario, String contraseña, String billetera) {
-        super(nombre_usuario, contraseña, billetera);
+    public BilleteraModel(int dinero) {
         this.dinero = dinero;
     }
-
 
     public int getDinero() {
         return dinero;
@@ -24,7 +20,6 @@ public class BilleteraModel extends ClienteModel {
 
     @Override
     public String toString() {
-        return super.toString() + "BilleteraModel{" + "dinero=" + dinero + '}';
-    }  
-    
+        return "BilleteraModel{" + "dinero=" + dinero + '}';
+    }
 }

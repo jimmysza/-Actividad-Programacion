@@ -1,20 +1,15 @@
-
 package Model;
+
 
 public class ClienteModel {
     private String nombre_usuario;
     private String contraseña;
-    private String billetera;
+    private BilleteraModel billetera;
 
-    public ClienteModel() {
-        
-    }
-    
-    
-    public ClienteModel(String nombre_usuario, String contraseña, String billetera) {
+    public ClienteModel(String nombre_usuario, String contraseña, int dinero) {
         this.nombre_usuario = nombre_usuario;
         this.contraseña = contraseña;
-        this.billetera = billetera;
+        this.billetera = new BilleteraModel(dinero);
     }
 
     public String getNombre_usuario() {
@@ -33,18 +28,16 @@ public class ClienteModel {
         this.contraseña = contraseña;
     }
 
-    public String getBilletera() {
+    public BilleteraModel getBilletera() {
         return billetera;
     }
 
-    public void setBilletera(String billetera) {
+    public void setBilletera(BilleteraModel billetera) {
         this.billetera = billetera;
     }
 
     @Override
     public String toString() {
-        return "ClienteModel{" + "nombre_usuario=" + nombre_usuario + ", contrase\u00f1a=" + contraseña + ", billetera=" + billetera + '}';
+        return "ClienteModel{" + "nombre_usuario=" + nombre_usuario + ", contraseña=" + contraseña + ", billetera=" + billetera + '}';
     }
-    
-    
 }
