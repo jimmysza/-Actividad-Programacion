@@ -1,14 +1,18 @@
-package Controller;
 
-import Model.ClienteModel;
+package controller;
+import model.ClienteModel;
 
 public abstract class BilleteraController {
+    
     protected ClienteModel cliente_model;
 
-    public BilleteraController(ClienteModel cliente_model) {
-        this.cliente_model = cliente_model;
+    public BilleteraController(ClienteModel cliente) {
+        this.cliente_model = cliente;
     }
 
-    protected abstract void transaccion();
+    
+    public abstract int transaccion();
+    
 }
+
 

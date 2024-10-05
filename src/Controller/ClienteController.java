@@ -1,40 +1,34 @@
 
-package Controller;
-
+package controller;
+import model.BilleteraModel;
 import javax.swing.JOptionPane;
-
-import Model.ClienteModel;
-
+import model.ClienteModel;
 public class ClienteController {
-    ClienteModel modelCliente = new ClienteModel();
     
+    public ClienteModel cliente_model;
+
     
-    
-    public boolean accederCuenta(){
-        String usuario = JOptionPane.showInputDialog(null,"Crea un usuario");
-        String contraseña = JOptionPane.showInputDialog(null,"Crea un Contraseña");
-        
-        if (usuario.equals(modelCliente.getNombre_usuario()) || contraseña.equals(modelCliente.getContraseña())) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-    
-    public void crearCuenta(){
-        String nombre_usuario = JOptionPane.showInputDialog(null,"Crea un usuario");
-        String contraseña = JOptionPane.showInputDialog(null,"Crea un Contraseña");
-        
-        modelCliente.setNombre_usuario(nombre_usuario);
-        modelCliente.setContraseña(contraseña);
+    public void crearCuenta(String nombre_usuario, String contraseña) {
+        BilleteraModel billetera = new BilleteraModel(0); 
+        cliente_model = new ClienteModel(nombre_usuario, contraseña, billetera);
+        JOptionPane.showMessageDialog(null, "Cuenta creada exitosamente.");
     }
 
-    public boolean existeCliente(){
-        if (modelCliente.getNombre_usuario() != "" && modelCliente.getContraseña() != "") {
+    
+    public boolean accederCuenta(String nombre_usuario, String contraseña) {
+        if (cliente_model!= null && cliente_model.getNombre_usuario().equals(nombre_usuario) && cliente_model.getContraseña().equals(contraseña)) {
+            JOptionPane.showMessageDialog(null, "Acceso concedido.");
             return true;
         } else {
+            JOptionPane.showMessageDialog(null, "Credenciales incorrectas.");
             return false;
         }
     }
-    
+
+
+    public ClienteModel getCliente() {
+        return cliente_model;
+    }
 }
+
+

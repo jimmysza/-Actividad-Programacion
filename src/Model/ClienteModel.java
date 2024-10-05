@@ -1,23 +1,21 @@
-package Model;
+
+package model;
+
 
 public class ClienteModel {
     private String nombre_usuario;
     private String contraseña;
     private BilleteraModel billetera;
 
-    // Constructor vacío
     public ClienteModel() {
-        this.billetera = new BilleteraModel();
     }
 
-    // Constructor con parámetros
-    public ClienteModel(String nombre_usuario, String contraseña, int dinero) {
+    public ClienteModel(String nombre_usuario, String contraseña, BilleteraModel billetera) {
         this.nombre_usuario = nombre_usuario;
         this.contraseña = contraseña;
-        this.billetera = new BilleteraModel(dinero);
+        this.billetera = billetera;
     }
 
-    // Getters y Setters
     public String getNombre_usuario() {
         return nombre_usuario;
     }
@@ -44,6 +42,12 @@ public class ClienteModel {
 
     @Override
     public String toString() {
-        return "ClienteModel{" + "nombre_usuario=" + nombre_usuario + ", contraseña=" + contraseña + ", billetera=" + billetera + '}';
+        return "ClienteModel{" + "nombre_usuario=" + nombre_usuario + ", contrase\u00f1a=" + contraseña + ", billetera=" + billetera.getDinero() + '}';
     }
-}
+
+    
+    }
+
+  
+    
+

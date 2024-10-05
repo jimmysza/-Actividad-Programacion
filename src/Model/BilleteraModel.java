@@ -1,4 +1,6 @@
-package Model;
+
+package model;
+
 
 public class BilleteraModel {
     private int dinero;
@@ -20,6 +22,14 @@ public class BilleteraModel {
 
     @Override
     public String toString() {
-        return "BilleteraModel{" + "dinero=" + dinero + '}';
+        return "BilleteraModel{" + "dinero: " + dinero + '}';
     }
+    
+  
+        
 }
+
+    
+
+
+

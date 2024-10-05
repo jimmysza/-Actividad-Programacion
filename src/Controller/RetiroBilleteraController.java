@@ -1,40 +1,31 @@
-package Controller;
-
+package controller;
 import javax.swing.JOptionPane;
-
-import Model.ClienteModel;
-
+import model.ClienteModel;
+        
 public class RetiroBilleteraController extends BilleteraController {
-
     private int retiro_dinero;
     
     public RetiroBilleteraController(ClienteModel cliente_model) {
         super(cliente_model);
     }
-    
+
+   
+
+  
     @Override
-    public void transaccion() {
-        int retiro_dinero = Integer.parseInt(JOptionPane.showInputDialog(null, "Cuanto Dinero deseas Retirar: "));
+    public int transaccion() {
+        String input = JOptionPane.showInputDialog("Ingrese la cantidad a retirar:");
+        int retiro = Integer.parseInt(input);
 
-        int saldoActual = cliente_model.getBilletera().getDinero();
-
-        if (retiro_dinero > saldoActual) {
-            JOptionPane.showMessageDialog(null, "No tiene suficiente dinero para realizar esta transacción.");
+        if (retiro > cliente_model.getBilletera().getDinero()) {
+            JOptionPane.showMessageDialog(null, "Saldo insuficiente.");
         } else {
-            cliente_model.getBilletera().setDinero(saldoActual - retiro_dinero);
-
-            JOptionPane.showMessageDialog(null, "Retiro realizado. Nuevo saldo: " + cliente_model.getBilletera().getDinero());
+            cliente_model.getBilletera().setDinero(cliente_model.getBilletera().getDinero() - retiro);
+            JOptionPane.showMessageDialog(null, "Retiro exitoso. Nuevo saldo: " + cliente_model.getBilletera().getDinero());
+            
         }
-    }
-
-    
-    public void setRetiro_dinero(int retiro_dinero) {
-        this.retiro_dinero = retiro_dinero;
-    }
-
-    
-    public boolean validarTransaccionRetiro(int retiro_dinero) {
+        return 0;
         
-        return true;
     }
 }
+

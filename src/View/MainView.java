@@ -1,109 +1,85 @@
-package View;
 
-import Controller.ClienteController;
-import Controller.ConsultaBilleteraController;
-import Controller.DepositoBilleteraController;
-import Controller.RetiroBilleteraController;
-import Model.ClienteModel;
+package view;
+
+import model.ClienteModel;
+import controller.ClienteController;
+import controller.ConsultaBilleteraController;
+import controller.DepositoBilleteraController;
+import controller.RetiroBilleteraController;
 import javax.swing.JOptionPane;
 
 public class MainView {
-
-    private ClienteController clienteController;
+    private final ClienteController clienteController;
     private ConsultaBilleteraController consultaBilleteraController;
     private DepositoBilleteraController depositoBilleteraController;
     private RetiroBilleteraController retiroBilleteraController;
-    private ClienteModel modelCliente; 
 
     public MainView() {
-        modelCliente = new ClienteModel(); // Inicializa modelCliente
-        this.clienteController = new ClienteController();
-        this.consultaBilleteraController = new ConsultaBilleteraController(modelCliente);
-        this.depositoBilleteraController = new DepositoBilleteraController(modelCliente);
-        this.retiroBilleteraController = new RetiroBilleteraController(modelCliente);
+        clienteController = new ClienteController();
     }
 
-    public static void main(String[] args) {
-        MainView view = new MainView();
-        view.mostrarMenuPrincipal();
-    }
-
-    private void mostrarMenuPrincipal() {
+    public void mainMenu() {
         while (true) {
-            int option = mostrarMenuCliente();
-            switch (option) {
+            String[] opciones = {"Crear Cuenta","Acceder a Cuenta", "Salir"};
+            int seleccion = JOptionPane.showOptionDialog(null, "Seleccione una opción", "Menú Principal",
+                    JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opciones, opciones);
+
+            switch (seleccion) {
+                case 0:
+                    crearCuenta();
+                    break;
                 case 1:
-                    if (formularioAccederCuenta()) {
-                        mostrarMenuBilletera();
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Acceso fallido. Verifica tus credenciales.");
+                    if (accederCuenta()) {
+                        menuBilletera();
                     }
                     break;
                 case 2:
-                    formularioCrearCuenta();
-                    break;
-                case 3:
                     System.exit(0);
-                    break;
-                default:
-                    JOptionPane.showMessageDialog(null, "Opción no válida");
             }
         }
     }
 
-    private int mostrarMenuCliente() {
-        return Integer.parseInt(JOptionPane.showInputDialog(null, """
-            BIENVENID@ A JWALLET
-            1. ACCEDER
-            2. CREAR CUENTA
-            3. SALIR
-            """));
+    public void crearCuenta() {
+        String nombre_usuario = JOptionPane.showInputDialog("Ingrese su nombre de usuario:");
+        String contraseña = JOptionPane.showInputDialog("Ingrese su contraseña:");
+        clienteController.crearCuenta(nombre_usuario, contraseña);
     }
 
-    private void mostrarMenuBilletera() {
+    public boolean accederCuenta() {
+        String nombre_usuario = JOptionPane.showInputDialog("Ingrese su nombre de usuario:");
+        String contraseña = JOptionPane.showInputDialog("Ingrese su contraseña:");
+        return clienteController.accederCuenta(nombre_usuario, contraseña);
+    }
+
+    public void menuBilletera() {
+        ClienteModel cliente = clienteController.getCliente();
+        consultaBilleteraController = new ConsultaBilleteraController(cliente) {};
+        depositoBilleteraController = new DepositoBilleteraController(cliente);
+        retiroBilleteraController = new RetiroBilleteraController(cliente);
+
         while (true) {
-            int option = Integer.parseInt(JOptionPane.showInputDialog(null, """
-                BIENVENID@ A JWALLET MARTZDEV
-                MENU DE OPCIONES
-                1. CONSULTAR SALDO
-                2. DEPOSITAR DINERO
-                3. RETIRAR DINERO
-                4. CERRAR SESIÓN
-                """));
-            switch (option) {
-                case 1:
+            String[] opciones = {"Consultar saldo", "Depositar", "Retirar", "Salir"};
+            int seleccion = JOptionPane.showOptionDialog(null, "Seleccione una opción", "Menú Billetera",
+                    JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opciones, opciones[0]);
+
+            switch (seleccion) {
+                case 0:
                     consultaBilleteraController.transaccion();
                     break;
-                case 2:
+                case 1:
                     depositoBilleteraController.transaccion();
                     break;
+                case 2:
+                    retiroBilleteraController.transaccion();
+                    break;
                 case 3:
-                    int cantidadRetirar = Integer.parseInt(JOptionPane.showInputDialog("Ingrese cantidad a retirar:"));
-                    retiroBilleteraController.validarTransaccionRetiro(cantidadRetirar);
-                    break;
-                case 4:
-                    JOptionPane.showMessageDialog(null, "Cerrando sesión");
-                    System.exit(0);
-                    break;
-                default:
-                    JOptionPane.showMessageDialog(null, "Opción no válida");
+                    return; 
             }
         }
     }
-
-    private void formularioCrearCuenta() {
-        String nombre_usuario = JOptionPane.showInputDialog(null, "Crea un usuario");
-        String contraseña = JOptionPane.showInputDialog(null, "Crea una Contraseña");
-
-        modelCliente.setNombre_usuario(nombre_usuario); 
-        modelCliente.setContraseña(contraseña);
-    }
-
-    private boolean formularioAccederCuenta() {
-        String usuario = JOptionPane.showInputDialog(null, "Ingresa tu usuario");
-        String contraseña = JOptionPane.showInputDialog(null, "Ingresa tu Contraseña");
-
-        
-        return usuario.equals(modelCliente.getNombre_usuario()) && contraseña.equals(modelCliente.getContraseña());
+        public static void main(String[] args) {
+        MainView mainView = new MainView();
+        mainView.mainMenu();
     }
 }
+
