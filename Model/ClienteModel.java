@@ -14,7 +14,7 @@ public class ClienteModel {
     public ClienteModel(String nombre_usuario, String contraseña, int dinero) {
         this.nombre_usuario = nombre_usuario;
         this.contraseña = contraseña;
-        this.billetera = new BilleteraModel(dinero); 
+        this.billetera = new BilleteraModel(dinero);
     }
 
     // Getters y Setters
