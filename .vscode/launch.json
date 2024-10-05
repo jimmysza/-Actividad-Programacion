@@ -1,0 +1,15 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        
+        {
+            "type": "java",
+            "name": "Launch Main",
+            "request": "launch",
+            "mainClass": "View.MainView",  // Clase principal con el método main
+            "classPaths": [
+                "${workspaceFolder}/bin"  // Ruta a las clases compiladas
+            ]
+        }
+    ]
+}

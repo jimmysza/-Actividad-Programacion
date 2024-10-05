@@ -15,16 +15,7 @@ public class ConsultaBilleteraController extends BilleteraController {
     }
     //2
     public void transaccion(){
-        int cantidadAEnviar;
-
-        int saldoActual = cliente_model.getBilletera().getDinero();
-
-        if (cantidadAEnviar > saldoActual) {
-            JOptionPane.showMessageDialog(null, "No tiene suficiente dinero para realizar esta transacción.");
-        } else {
-            cliente_model.getBilletera().setDinero(saldoActual - cantidadAEnviar);
-            JOptionPane.showMessageDialog(null, "Transacción realizada. Nuevo saldo: " + cliente_model.getBilletera().getDinero());
-        }
+        JOptionPane.showMessageDialog(null,"Tu dinero Actual es: " + cliente_model.getBilletera().getDinero());
     }
 
 }

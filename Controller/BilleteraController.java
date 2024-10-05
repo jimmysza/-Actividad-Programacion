@@ -9,6 +9,6 @@ public abstract class BilleteraController {
         this.cliente_model = cliente_model;
     }
 
-    protected abstract int transaccion();
+    protected abstract void transaccion();
 }
 
