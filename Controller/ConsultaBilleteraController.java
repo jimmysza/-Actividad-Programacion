@@ -1,32 +1,30 @@
 package Controller;
 
-import javax.swing.JOptionPane;
 import Model.ClienteModel;
 
-public class ConsultaBilleteraController {
+import javax.swing.JOptionPane;
 
-    private ClienteModel modelCliente;
+public class ConsultaBilleteraController extends BilleteraController {
 
-    public ConsultaBilleteraController(ClienteModel modelCliente) {
-        this.modelCliente = modelCliente;
+    public ClienteModel cliente_model;
+
+
+    //1
+    public ConsultaBilleteraController(ClienteModel cliente_model) {
+        this.cliente_model = cliente_model;
     }
+    //2
+    public void transaccion(){
+        int cantidadAEnviar;
 
-    // Método para consultar el saldo de la billetera del cliente
-    public int consultarSaldo() {
-        return modelCliente.getBilletera().getDinero();
-    }
-
-    // Método para realizar una transacción de dinero
-    protected void realizarTransaccion() {
-        int cantidadAEnviar = Integer.parseInt(JOptionPane.showInputDialog(null, "¿Cuánto dinero desea enviar?"));
-        int saldoActual = modelCliente.getBilletera().getDinero();
+        int saldoActual = cliente_model.getBilletera().getDinero();
 
         if (cantidadAEnviar > saldoActual) {
             JOptionPane.showMessageDialog(null, "No tiene suficiente dinero para realizar esta transacción.");
         } else {
-            // Actualizar el saldo restando el dinero enviado
-            modelCliente.getBilletera().setDinero(saldoActual - cantidadAEnviar);
-            JOptionPane.showMessageDialog(null, "Transacción realizada. Nuevo saldo: " + modelCliente.getBilletera().getDinero());
+            cliente_model.getBilletera().setDinero(saldoActual - cantidadAEnviar);
+            JOptionPane.showMessageDialog(null, "Transacción realizada. Nuevo saldo: " + cliente_model.getBilletera().getDinero());
         }
     }
+
 }

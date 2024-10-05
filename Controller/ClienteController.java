@@ -14,7 +14,6 @@ public class ClienteController {
         String usuario = JOptionPane.showInputDialog(null,"Crea un usuario");
         String contraseña = JOptionPane.showInputDialog(null,"Crea un Contraseña");
         
-        
         if (usuario.equals(modelCliente.getNombre_usuario()) || contraseña.equals(modelCliente.getContraseña())) {
             return true;
         } else {

@@ -1,20 +1,14 @@
-
 package Controller;
 
 import Model.ClienteModel;
 
-
 public abstract class BilleteraController {
+    protected ClienteModel cliente_model;
 
-    protected ClienteModel cliente_model = new ClienteModel();
-    
-    private ConsultaBilleteraController[] consulta;
-
-    public BilleteraController(){
-        this.consulta = new consulta[2];
+    public BilleteraController(ClienteModel cliente_model) {
+        this.cliente_model = cliente_model;
     }
 
-    public abstract int BilleteraController(ClienteModel cliente_model);
-    
-    
+    protected abstract int transaccion();
 }
+
