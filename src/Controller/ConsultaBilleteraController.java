@@ -1,20 +1,21 @@
 package Controller;
 
 import Model.ClienteModel;
-
 import javax.swing.JOptionPane;
 
 public class ConsultaBilleteraController extends BilleteraController {
 
-    public ClienteModel cliente_model;
+    private final ClienteModel cliente_model;
 
-    //1
+    // Constructor
     public ConsultaBilleteraController(ClienteModel cliente_model) {
+        super(cliente_model);
         this.cliente_model = cliente_model;
     }
-    //2
-    public void transaccion(){
-        JOptionPane.showMessageDialog(null,"Tu dinero Actual es: " + cliente_model.getBilletera().getDinero());
-    }
 
+    
+    @Override
+    public void transaccion() {
+        JOptionPane.showMessageDialog(null, "Tu dinero actual es: " + cliente_model.getBilletera().getDinero());
+    }
 }
